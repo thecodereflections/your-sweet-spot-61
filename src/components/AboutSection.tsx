@@ -3,9 +3,16 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { scrollToContact } from "@/lib/scroll";
 
+const stats = [
+  { value: "50+", label: "Projects Delivered" },
+  { value: "98%", label: "Client Satisfaction" },
+  { value: "24hr", label: "Response Time" },
+  { value: "3+", label: "Years Experience" },
+];
+
 const AboutSection = () => {
   return (
-    <section id="about" className="py-24 bg-background">
+    <section id="about" className="py-24 relative">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -14,7 +21,7 @@ const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-sm font-semibold text-secondary uppercase tracking-widest">About Us</span>
+            <span className="text-sm font-semibold text-secondary uppercase tracking-[0.2em]">About Us</span>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-3 mb-6 leading-tight">
               We're Not Just Developers — We're a Digital{" "}
               <span className="gradient-text">Systems Partner</span>
@@ -38,19 +45,14 @@ const AboutSection = () => {
             transition={{ duration: 0.6 }}
             className="grid grid-cols-2 gap-4"
           >
-            {[
-              { value: "50+", label: "Projects Delivered" },
-              { value: "98%", label: "Client Satisfaction" },
-              { value: "24hr", label: "Response Time" },
-              { value: "3+", label: "Years Experience" },
-            ].map((stat, i) => (
+            {stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-card rounded-2xl p-6 shadow-card border border-border text-center hover:shadow-card-hover transition-shadow duration-300"
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                className="glass rounded-2xl p-6 text-center hover-glow transition-all duration-300"
               >
                 <div className="font-display text-3xl font-bold gradient-text mb-1">{stat.value}</div>
                 <div className="text-sm text-muted-foreground">{stat.label}</div>

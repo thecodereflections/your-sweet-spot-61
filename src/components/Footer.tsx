@@ -16,14 +16,14 @@ const legalLinks = [
 
 const Footer = () => {
   return (
-    <footer className="py-16 border-t border-border bg-card">
+    <footer className="py-16 border-t border-border bg-card/50">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-2">
             <a href="/" className="flex items-center gap-2">
               <img src={logo} alt="The Code Reflections" className="h-9 w-9 rounded-md object-contain" />
-              <span className="font-display text-xl font-bold text-card-foreground">
-                The Code <span className="gradient-text">Reflections</span>
+              <span className="font-display text-xl font-bold text-foreground">
+                Code <span className="gradient-text">Reflections</span>
               </span>
             </a>
             <p className="text-muted-foreground text-sm mt-3 max-w-sm leading-relaxed">
@@ -32,11 +32,11 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display font-semibold text-card-foreground mb-4 text-sm">Company</h4>
+            <h4 className="font-display font-semibold text-foreground mb-4 text-sm">Company</h4>
             <ul className="space-y-2">
               {companyLinks.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors animated-underline pb-0.5">
                     {link.label}
                   </Link>
                 </li>
@@ -44,11 +44,11 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h4 className="font-display font-semibold text-card-foreground mb-4 text-sm">Legal</h4>
+            <h4 className="font-display font-semibold text-foreground mb-4 text-sm">Legal</h4>
             <ul className="space-y-2">
               {legalLinks.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors animated-underline pb-0.5">
                     {link.label}
                   </Link>
                 </li>
@@ -57,7 +57,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-border pt-6 text-center">
+        <div className="section-divider" />
+        <div className="pt-6 text-center">
           <p className="text-xs text-muted-foreground">
             © 2026 The Code Reflections. All rights reserved.
           </p>

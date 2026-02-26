@@ -9,11 +9,11 @@ import { toast } from "@/hooks/use-toast";
 import { z } from "zod";
 
 const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100, "Name is too long"),
-  email: z.string().trim().email("Please enter a valid email").max(255, "Email is too long"),
-  phone: z.string().trim().max(20, "Phone number is too long").optional().or(z.literal("")),
-  company: z.string().trim().max(100, "Company name is too long").optional().or(z.literal("")),
-  message: z.string().trim().min(1, "Message is required").max(2000, "Message is too long"),
+  name: z.string().trim().min(1, "Name is required").max(100),
+  email: z.string().trim().email("Please enter a valid email").max(255),
+  phone: z.string().trim().max(20).optional().or(z.literal("")),
+  company: z.string().trim().max(100).optional().or(z.literal("")),
+  message: z.string().trim().min(1, "Message is required").max(2000),
 });
 
 type FormErrors = Partial<Record<keyof z.infer<typeof contactSchema>, string>>;
@@ -26,9 +26,7 @@ const ContactSection = () => {
 
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    if (errors[field as keyof FormErrors]) {
-      setErrors((prev) => ({ ...prev, [field]: undefined }));
-    }
+    if (errors[field as keyof FormErrors]) setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,10 +36,7 @@ const ContactSection = () => {
     const result = contactSchema.safeParse(formData);
     if (!result.success) {
       const fieldErrors: FormErrors = {};
-      result.error.errors.forEach((err) => {
-        const field = err.path[0] as keyof FormErrors;
-        fieldErrors[field] = err.message;
-      });
+      result.error.errors.forEach((err) => { fieldErrors[err.path[0] as keyof FormErrors] = err.message; });
       setErrors(fieldErrors);
       return;
     }
@@ -57,7 +52,6 @@ const ContactSection = () => {
         company: result.data.company || null,
         message: result.data.message,
       });
-
       if (error) throw error;
 
       setIsSubmitted(true);
@@ -71,15 +65,17 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-background">
+    <section id="contact" className="py-24 relative">
+      <div className="section-divider mb-24" />
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-semibold text-secondary uppercase tracking-widest">Contact Us</span>
+          <span className="text-sm font-semibold text-secondary uppercase tracking-[0.2em]">Contact Us</span>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-3 mb-4">
             Let's Build Something <span className="gradient-text">Great Together</span>
           </h2>
@@ -108,8 +104,8 @@ const ContactSection = () => {
                 { icon: MapPin, label: "India (Remote)" },
               ].map((c) => (
                 <div key={c.label} className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0">
-                    <c.icon size={16} className="text-secondary" />
+                  <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <c.icon size={16} className="text-primary" />
                   </div>
                   <span className="text-sm text-muted-foreground">{c.label}</span>
                 </div>
@@ -121,7 +117,7 @@ const ContactSection = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="lg:col-span-3 flex flex-col items-center justify-center text-center py-16 bg-card rounded-2xl border border-border"
+              className="lg:col-span-3 flex flex-col items-center justify-center text-center py-16 glass rounded-2xl glow-border"
             >
               <CheckCircle size={48} className="text-secondary mb-4" />
               <h3 className="font-display text-xl font-semibold text-foreground mb-2">Message Sent!</h3>
@@ -142,7 +138,7 @@ const ContactSection = () => {
                     placeholder="Full Name *"
                     value={formData.name}
                     onChange={(e) => handleChange("name", e.target.value)}
-                    className={`bg-card ${errors.name ? "border-destructive" : ""}`}
+                    className={`bg-muted/50 border-border focus:border-primary ${errors.name ? "border-destructive" : ""}`}
                     disabled={isSubmitting}
                   />
                   {errors.name && <p className="text-destructive text-xs mt-1">{errors.name}</p>}
@@ -153,27 +149,15 @@ const ContactSection = () => {
                     type="email"
                     value={formData.email}
                     onChange={(e) => handleChange("email", e.target.value)}
-                    className={`bg-card ${errors.email ? "border-destructive" : ""}`}
+                    className={`bg-muted/50 border-border focus:border-primary ${errors.email ? "border-destructive" : ""}`}
                     disabled={isSubmitting}
                   />
                   {errors.email && <p className="text-destructive text-xs mt-1">{errors.email}</p>}
                 </div>
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
-                <Input
-                  placeholder="Phone Number"
-                  value={formData.phone}
-                  onChange={(e) => handleChange("phone", e.target.value)}
-                  className="bg-card"
-                  disabled={isSubmitting}
-                />
-                <Input
-                  placeholder="Company Name (Optional)"
-                  value={formData.company}
-                  onChange={(e) => handleChange("company", e.target.value)}
-                  className="bg-card"
-                  disabled={isSubmitting}
-                />
+                <Input placeholder="Phone Number" value={formData.phone} onChange={(e) => handleChange("phone", e.target.value)} className="bg-muted/50 border-border focus:border-primary" disabled={isSubmitting} />
+                <Input placeholder="Company Name (Optional)" value={formData.company} onChange={(e) => handleChange("company", e.target.value)} className="bg-muted/50 border-border focus:border-primary" disabled={isSubmitting} />
               </div>
               <div>
                 <Textarea
@@ -181,23 +165,13 @@ const ContactSection = () => {
                   rows={5}
                   value={formData.message}
                   onChange={(e) => handleChange("message", e.target.value)}
-                  className={`bg-card resize-none ${errors.message ? "border-destructive" : ""}`}
+                  className={`bg-muted/50 border-border focus:border-primary resize-none ${errors.message ? "border-destructive" : ""}`}
                   disabled={isSubmitting}
                 />
                 {errors.message && <p className="text-destructive text-xs mt-1">{errors.message}</p>}
               </div>
               <Button variant="hero" size="lg" type="submit" className="w-full sm:w-auto" disabled={isSubmitting}>
-                {isSubmitting ? (
-                  <>
-                    <Loader2 size={16} className="mr-2 animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    Send Message
-                    <Send size={16} className="ml-2" />
-                  </>
-                )}
+                {isSubmitting ? <><Loader2 size={16} className="mr-2 animate-spin" />Sending...</> : <>Send Message<Send size={16} className="ml-2" /></>}
               </Button>
             </motion.form>
           )}

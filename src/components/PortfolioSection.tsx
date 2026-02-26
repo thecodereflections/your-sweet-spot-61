@@ -30,15 +30,17 @@ const caseStudies = [
 
 const PortfolioSection = () => {
   return (
-    <section id="case-studies" className="py-24 bg-background">
+    <section id="case-studies" className="py-24 relative">
+      <div className="section-divider mb-24" />
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-semibold text-secondary uppercase tracking-widest">Case Studies</span>
+          <span className="text-sm font-semibold text-secondary uppercase tracking-[0.2em]">Case Studies</span>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-3 mb-4">
             Real Systems. <span className="gradient-text">Measurable Outcomes.</span>
           </h2>
@@ -51,13 +53,13 @@ const PortfolioSection = () => {
           {caseStudies.map((study, i) => (
             <motion.div
               key={study.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-card rounded-2xl p-8 border border-border shadow-card hover:shadow-card-hover transition-all duration-300"
+              transition={{ delay: i * 0.12, duration: 0.5 }}
+              className="glass rounded-2xl p-8 hover-glow hover:-translate-y-1 transition-all duration-300 group"
             >
-              <div className="w-12 h-12 rounded-xl gradient-accent flex items-center justify-center mb-5">
+              <div className="w-12 h-12 rounded-xl gradient-accent flex items-center justify-center mb-5 group-hover:shadow-glow-sm group-hover:scale-110 transition-all duration-300">
                 <study.icon size={22} className="text-accent-foreground" />
               </div>
               <span className="text-xs text-secondary font-semibold uppercase tracking-wider">{study.clientType}</span>
@@ -77,8 +79,8 @@ const PortfolioSection = () => {
           viewport={{ once: true }}
           className="text-center text-muted-foreground text-sm mt-10"
         >
-          Want something similar for your business?{" "}
-          <a href="#contact" className="text-secondary hover:underline font-medium">Start a project →</a>
+          Want something similar?{" "}
+          <a href="#contact" className="text-secondary hover:text-primary font-medium animated-underline pb-0.5 transition-colors">Start a project →</a>
         </motion.p>
       </div>
     </section>
