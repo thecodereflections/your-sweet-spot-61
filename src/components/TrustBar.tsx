@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 
 const TrustBar = () => {
   return (
-    <section className="py-8 bg-card border-b border-border">
+    <section className="py-6 relative">
+      <div className="section-divider mb-6" />
       <div className="container mx-auto px-4">
         <motion.p
           initial={{ opacity: 0, y: 10 }}

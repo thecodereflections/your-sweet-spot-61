@@ -12,17 +12,19 @@ const reasons = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-24 relative">
+      <div className="section-divider mb-24" />
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-semibold text-secondary uppercase tracking-widest">Why Us</span>
+          <span className="text-sm font-semibold text-secondary uppercase tracking-[0.2em]">Why Us</span>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-3 mb-4">
-            Why People Choose <span className="gradient-text">The Code Reflections</span>
+            Why People Choose <span className="gradient-text">Code Reflections</span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             We focus on quality, modern design, and scalable development to help businesses grow faster.
@@ -36,11 +38,11 @@ const WhyChooseUs = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className="flex gap-4"
+              transition={{ delay: i * 0.08, duration: 0.5 }}
+              className="flex gap-4 group"
             >
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">
-                <reason.icon size={20} className="text-secondary" />
+              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 group-hover:shadow-glow-sm transition-all duration-300">
+                <reason.icon size={20} className="text-primary" />
               </div>
               <div>
                 <h3 className="font-display font-semibold text-foreground mb-1">{reason.title}</h3>
