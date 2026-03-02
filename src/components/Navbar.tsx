@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
@@ -8,7 +9,7 @@ import logo from "@/assets/logo.png";
 const navLinks = [
   { label: "Home", href: "#" },
   { label: "About", href: "#about" },
-  { label: "Team", href: "#team" },
+  { label: "Team", href: "/team" },
   { label: "Services", href: "#services" },
   { label: "How We Work", href: "#process" },
   { label: "Case Studies", href: "#case-studies" },
