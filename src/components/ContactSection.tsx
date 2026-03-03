@@ -54,6 +54,16 @@ const ContactSection = () => {
       });
       if (error) throw error;
 
+      // Send email notification
+      await supabase.functions.invoke("send-contact-email", {
+        body: {
+          name: result.data.name,
+          email: result.data.email,
+          company: result.data.company || "",
+          message: result.data.message,
+        },
+      });
+
       setIsSubmitted(true);
       setFormData({ name: "", email: "", phone: "", company: "", message: "" });
       toast({ title: "Message sent!", description: "We'll get back to you within 24 hours." });
