@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Send, Mail, Phone, MapPin, CheckCircle, Loader2 } from "lucide-react";
+import { Send, Mail, MapPin, CheckCircle, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { z } from "zod";
@@ -158,7 +158,6 @@ const ContactSection = () => {
                 </div>
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
-                <Input placeholder="Phone Number" value={formData.phone} onChange={(e) => handleChange("phone", e.target.value)} className="bg-muted/30 border-border/60 focus:border-primary/50 transition-colors duration-300" disabled={isSubmitting} />
                 <Input placeholder="Company Name (Optional)" value={formData.company} onChange={(e) => handleChange("company", e.target.value)} className="bg-muted/30 border-border/60 focus:border-primary/50 transition-colors duration-300" disabled={isSubmitting} />
               </div>
               <div>
