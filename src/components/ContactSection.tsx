@@ -114,6 +114,9 @@ const ContactSection = () => {
             </motion.div>
           ) : (
             <motion.form
+              name="contact"
+              method="POST"
+              data-netlify="true"
               onSubmit={handleSubmit}
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -121,9 +124,11 @@ const ContactSection = () => {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="lg:col-span-3 space-y-4"
             >
+              <input type="hidden" name="form-name" value="contact" />
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <Input
+                    name="name"
                     placeholder="Full Name *"
                     value={formData.name}
                     onChange={(e) => handleChange("name", e.target.value)}
@@ -134,6 +139,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <Input
+                    name="email"
                     placeholder="Email Address *"
                     type="email"
                     value={formData.email}
@@ -144,11 +150,9 @@ const ContactSection = () => {
                   {errors.email && <p className="text-destructive text-xs mt-1">{errors.email}</p>}
                 </div>
               </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <Input placeholder="Company Name (Optional)" value={formData.company} onChange={(e) => handleChange("company", e.target.value)} className="bg-muted/30 border-border/60 focus:border-primary/50 transition-colors duration-300" disabled={isSubmitting} />
-              </div>
               <div>
                 <Textarea
+                  name="message"
                   placeholder="Tell us about your project... *"
                   rows={5}
                   value={formData.message}
