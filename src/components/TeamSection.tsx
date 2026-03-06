@@ -86,12 +86,14 @@ const TeamSection = () => {
               </div>
 
               {/* LinkedIn */}
-              <a href={member.linkedin} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="sm" className="w-full group/btn">
-                  <Linkedin size={16} className="mr-2" />
-                  Connect with {member.name.split(" ")[0]} on LinkedIn
-                </Button>
-              </a>
+              {member.linkedin && (
+                <a href={member.linkedin} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="sm" className="w-full group/btn">
+                    <Linkedin size={16} className="mr-2" />
+                    Connect with {member.name.split(" ")[0]} on LinkedIn
+                  </Button>
+                </a>
+              )}
             </motion.div>
           ))}
         </div>
