@@ -4,22 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Send, Mail, MapPin, CheckCircle, Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
-import { z } from "zod";
 
-const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().trim().email("Please enter a valid email").max(255),
-  phone: z.string().trim().max(20).optional().or(z.literal("")),
-  company: z.string().trim().max(100).optional().or(z.literal("")),
-  message: z.string().trim().min(1, "Message is required").max(2000),
-});
-
-type FormErrors = Partial<Record<keyof z.infer<typeof contactSchema>, string>>;
+type FormErrors = { name?: string; email?: string; message?: string };
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", company: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -29,43 +19,30 @@ const ContactSection = () => {
     if (errors[field as keyof FormErrors]) setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
+  const validate = (): FormErrors => {
+    const errs: FormErrors = {};
+    if (!formData.name.trim()) errs.name = "Name is required";
+    if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errs.email = "Valid email is required";
+    if (!formData.message.trim()) errs.message = "Message is required";
+    return errs;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
 
-    const result = contactSchema.safeParse(formData);
-    if (!result.success) {
-      const fieldErrors: FormErrors = {};
-      result.error.errors.forEach((err) => { fieldErrors[err.path[0] as keyof FormErrors] = err.message; });
-      setErrors(fieldErrors);
-      return;
-    }
+    const fieldErrors = validate();
+    if (Object.keys(fieldErrors).length) { setErrors(fieldErrors); return; }
 
     setIsSubmitting(true);
     setErrors({});
 
     try {
-      const { error } = await supabase.from("contact_submissions").insert({
-        name: result.data.name,
-        email: result.data.email,
-        phone: result.data.phone || null,
-        company: result.data.company || null,
-        message: result.data.message,
-      });
-      if (error) throw error;
-
-      // Send email notification
-      await supabase.functions.invoke("send-contact-email", {
-        body: {
-          name: result.data.name,
-          email: result.data.email,
-          company: result.data.company || "",
-          message: result.data.message,
-        },
-      });
-
+      const form = e.target as HTMLFormElement;
+      const data = new FormData(form);
+      await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(data as any).toString() });
       setIsSubmitted(true);
-      setFormData({ name: "", email: "", phone: "", company: "", message: "" });
+      setFormData({ name: "", email: "", message: "" });
       toast({ title: "Message sent!", description: "We'll get back to you within 24 hours." });
     } catch {
       toast({ title: "Something went wrong", description: "Please try again or email us directly.", variant: "destructive" });
