@@ -38,9 +38,12 @@ const ContactSection = () => {
     setErrors({});
 
     try {
-      const form = e.target as HTMLFormElement;
-      const data = new FormData(form);
-      await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(data as any).toString() });
+      const res = await fetch("/.netlify/functions/send-contact-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) throw new Error("Failed to send");
       setIsSubmitted(true);
       setFormData({ name: "", email: "", message: "" });
       toast({ title: "Message sent!", description: "We'll get back to you within 24 hours." });
