@@ -14,8 +14,10 @@ import ContactSection from "@/components/ContactSection";
 import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
 import FloatingBubbles from "@/components/FloatingBubbles";
+import useSmoothScroll from "@/hooks/useSmoothScroll";
 
 const Index = () => {
+  useSmoothScroll();
   return (
     <div className="min-h-screen bg-background relative">
       <FloatingBubbles />
