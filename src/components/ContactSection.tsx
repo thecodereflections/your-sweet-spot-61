@@ -65,7 +65,15 @@ const ContactSection = () => {
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="text-center mb-16"
         >
-          <span className="text-xs font-semibold text-secondary/80 uppercase tracking-[0.3em]">Contact Us</span>
+          <motion.span
+            initial={{ opacity: 0, letterSpacing: "0.5em" }}
+            whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-xs font-semibold text-secondary/80 uppercase tracking-[0.3em] inline-block"
+          >
+            Contact Us
+          </motion.span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-5">
             Let's Build Something <span className="gradient-text">Great Together</span>
           </h2>

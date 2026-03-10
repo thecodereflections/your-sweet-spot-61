@@ -34,13 +34,23 @@ const ProblemSection = () => {
           {problems.map((p, i) => (
             <motion.div
               key={p.label}
-              initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 20, scale: 0.9, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.6, ease: "easeOut" }}
+              transition={{ delay: i * 0.1, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+              whileHover={{
+                scale: 1.06,
+                y: -4,
+                transition: { duration: 0.3, ease: "easeOut" },
+              }}
               className="flex items-center gap-3 gradient-border-card rounded-2xl px-6 py-3.5 cursor-default group"
             >
-              <p.icon size={16} className="text-destructive/80 flex-shrink-0 group-hover:text-destructive transition-colors duration-300" />
+              <motion.div
+                whileHover={{ rotate: [0, -10, 10, -5, 0] }}
+                transition={{ duration: 0.5 }}
+              >
+                <p.icon size={16} className="text-destructive/80 flex-shrink-0 group-hover:text-destructive transition-colors duration-300" />
+              </motion.div>
               <span className="text-sm font-medium text-foreground/90">{p.label}</span>
             </motion.div>
           ))}
