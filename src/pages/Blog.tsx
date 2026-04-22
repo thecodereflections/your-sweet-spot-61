@@ -13,13 +13,6 @@ const blogPosts = [
     date: "Apr 22, 2026",
   },
   {
-    title: "How AI Agents Are Transforming Modern Businesses",
-    excerpt:
-      "Discover how autonomous AI agents are reshaping operations, customer service, and decision-making across industries.",
-    category: "AI & Automation",
-    date: "Mar 12, 2026",
-  },
-  {
     title: "The Future of Web Development in 2026",
     excerpt:
       "From AI-assisted coding to edge-first architectures, here are the trends defining how we build for the web this year.",
