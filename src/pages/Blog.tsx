@@ -6,6 +6,13 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const blogPosts = [
   {
+    title: "What is an AI Agent And How Businesses Are Using It in 2026",
+    excerpt:
+      "A clear breakdown of what AI agents are, how they work, and the practical ways forward-thinking businesses are deploying them in 2026.",
+    category: "AI & Automation",
+    date: "Apr 22, 2026",
+  },
+  {
     title: "How AI Agents Are Transforming Modern Businesses",
     excerpt:
       "Discover how autonomous AI agents are reshaping operations, customer service, and decision-making across industries.",
