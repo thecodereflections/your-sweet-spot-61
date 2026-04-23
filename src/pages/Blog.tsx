@@ -121,8 +121,6 @@ const Blog = () => {
           >
             <a
               href={featured.link ?? "#"}
-              target={featured.link ? "_blank" : undefined}
-              rel={featured.link ? "noopener noreferrer" : undefined}
               className="block"
             >
             <Card className="group overflow-hidden border-border/60 hover:border-primary/40 transition-all duration-500 cursor-pointer">
