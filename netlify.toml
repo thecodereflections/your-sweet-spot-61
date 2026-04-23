@@ -1,11 +1,4 @@
 [[redirects]]
-  from = "/blogs"
-  to = "https://what-is-an-agent.netlify.app/blogs"
+  from = "/*"
+  to = "/index.html"
   status = 200
-  force = true
-
-[[redirects]]
-  from = "/blogs/*"
-  to = "https://what-is-an-agent.netlify.app/blogs/:splat"
-  status = 200
-  force = true
