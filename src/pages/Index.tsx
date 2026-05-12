@@ -51,7 +51,6 @@ const Index = () => {
         </div>
         <SectionConnector />
         <TechStackSection />
-        <TechStackSection />
         <SectionConnector variant="accent" />
         <div className="relative">
           <SectionGlow position="right" color="secondary" />
