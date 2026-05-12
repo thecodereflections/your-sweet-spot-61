@@ -55,6 +55,11 @@ const Index = () => {
           <SectionGlow position="left" color="primary" />
           <PortfolioSection />
         </div>
+        <SectionConnector variant="accent" />
+        <div className="relative">
+          <SectionGlow position="left" color="primary" />
+          <PortfolioSection />
+        </div>
         <SectionConnector />
         <TechStackSection />
         <SectionConnector variant="accent" />
