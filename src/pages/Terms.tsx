@@ -89,10 +89,10 @@ const Terms = () => {
               <p className="text-muted-foreground text-sm">
                 For any questions, contact us at:{" "}
                 <a
-                  href="mailto:contact@codereflections.com"
+                  href="mailto:support@thecodereflections.com"
                   className="text-primary hover:underline"
                 >
-                  contact@codereflections.com
+                  support@thecodereflections.com
                 </a>
               </p>
             </div>
