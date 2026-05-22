@@ -3,11 +3,16 @@ import Lenis from "lenis";
 
 const useSmoothScroll = () => {
   useEffect(() => {
+    const reduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     const lenis = new Lenis({
-      duration: 1.4,
+      duration: 1.05,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
+      smoothWheel: !reduced,
       touchMultiplier: 1.5,
+      wheelMultiplier: 1.1,
     });
 
     const raf = (time: number) => {
