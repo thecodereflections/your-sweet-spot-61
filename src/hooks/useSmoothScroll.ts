@@ -8,11 +8,11 @@ const useSmoothScroll = () => {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const lenis = new Lenis({
-      duration: 1.05,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 0.9,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
       smoothWheel: !reduced,
       touchMultiplier: 1.5,
-      wheelMultiplier: 1.1,
+      wheelMultiplier: 1,
     });
 
     const raf = (time: number) => {
